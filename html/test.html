@@ -1,0 +1,19 @@
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+function ss(keyword){
+	$.get("test.php",{keyword:"1234",limit:"1"},function(data){
+		var mp3=data.split(",");
+		t=document.getElementById("mp3url")；
+		t.src=mp3[2];
+		mp3start();
+		});
+}
+</script>
+<html>
+<body>
+123
+<form name="f1">
+</form>
+</div>
+</body>
+</html>

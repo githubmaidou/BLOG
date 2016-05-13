@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+/*function next(){
+	var  mp31=document.getElementsByName("mp3a");
+	var  mp32=document.getElementById("mp3list");
+	for(var a=0;a<mp31.length;a++){
+		if(mp32.src==mp31[a].rel){
+			a++;
+			mp32.src=mp31[a].rel;
+			console.log(mp31[a].rel.split(',')[0]);
+			clickstart(mp30[a].rel.split(',')[0],mp31[a].rel.split(',')[1]);
+			break;}
+	
+}
+}*/
+function mp3start(){
+	var mp3s=document.getElementById('mp3list');
+	mp3s.play()
+	}
+function mp3paus(){
+	var mp3s=document.getElementById('mp3list');
+	mp3s.pause()
+	}
+
+function ss(){
+	var keywords=document.getElementById("ssk").value;
+        $.get("test.php",{keyword:keywords,limit:"15"},function(data){
+                var mp3=data.split('^');
+		//var ul=document.getElementById("mp3ul");
+                //var li=document.createElement("li");
+                //var a=document.createElement("A");
+//		for(var c=0;c<15;c++){
+		var tds = document.getElementsByName("mp3li");
+		len = tds.length
+		for(var c=0; c<len; c++){
+		tds.item(0).remove();
+		}
+		for(var i=0;i<mp3.length-1;i++){
+			var ul=document.getElementById("mp3ul");
+			var li=document.createElement("li");
+			var a=document.createElement("A");
+			a.innerHTML=mp3[i].split(',')[0];
+			a.src=mp3[i].split(',')[1];
+			a.setAttribute('onclick','addmp3("'+mp3[i].split(',')[0]+'","'+mp3[i].split(',')[1]+','+mp3[i].split(',')[2]+'");');
+			//a.setAttribute('onclick','addmp3('+mp3[i].split(',')[0]+','+mp3[i].split(',')[1]+');');
+			li.setAttribute('name','mp3li');
+			li.appendChild(a);
+			ul.appendChild(li);
+			//t=document.getElementById("mp3list");
+                	//t.src=mp3[1];
+			//tt=document.getElementById("mp3pic");
+			//tt.src=mp3[2];
+                	//mp3start();
+                }});
+}
+function addmp3(atext,asrc){
+	var ul2=document.getElementById("mp3ul2");
+	var li2=document.createElement("li");
+	var a=document.createElement("A");
+	a.innerHTML=atext;
+	a.setAttribute('onclick','clickstart("'+asrc.split(',')[0]+'","'+asrc.split(',')[1]+'");');
+	a.setAttribute('name','mp3a');
+	a.setAttribute('rel',asrc);
+	li2.appendChild(a);
+	ul2.appendChild(li2);
+}
+function clickstart(mp3url,mp3pic){
+	t=document.getElementById("mp3list");
+	tt=document.getElementById("mp3pic");
+	t.src=mp3url;
+	tt.src=mp3pic;
+	mp3start();
+	}
+function next(){
+        var  mp31=document.getElementsByName("mp3a");
+        var  mp32=document.getElementById("mp3list");
+	var  num=mp31.length-1;
+	//console.log();
+        for(var a=0;a<num+1;a++){
+		//console.log(mp31[a].rel);
+		//console.log(mp32.src);
+                if(mp32.src.split(',')[0]==mp31[a].rel.split(',')[0]){
+                        a++;
+			console.log(a);
+			if(a>num){
+				a=0;}
+                        mp32.src=mp31[a].rel;
+			document.getElementById("mp3pic").src=mp31[a].rel.split(',')[1];
+                        //console.log(mp31[a].rel.split(',')[0]);
+                        //clickstart(mp31[a].rel.split(',')[0],mp31[a].rel.split(',')[1]);			
+			//console.log('a');
+                        break;
+}
+        
+}
+}
+function next2(){
+        var  mp31=document.getElementsByName("mp3a");
+        var  mp32=document.getElementById("mp3list");
+	var  num2=mp31.length-1;
+        for(var a=0;a<num2+1;a++){
+                if(mp32.src.split(',')[0]==mp31[a].rel.split(',')[0]){
+                        a--;
+                        if(a<0){
+                                a=num2;}
+                        mp32.src=mp31[a].rel;
+                        document.getElementById("mp3pic").src=mp31[a].rel.split(',')[1];
+                        //console.log(mp31[a].rel.split(',')[0]);
+                        //clickstart(mp31[a].rel.split(',')[0],mp31[a].rel.split(',')[1]);                      
+                        mp3start();
+                        break;}
+        
+}
+}
+
+</script>
+<style>
+ul {list-style-type:none}
+.div1{
+	margin: 0 auto;
+	width: 575px;
+	height: 575px;
+	border: 1px solid #F00;
+	margin-top: 10%;
+}
+.div2{
+	margin: 0 auto;
+	width: 200px;
+	height: 470px;
+	border: 1px solid #F00;
+	margin-left: 20px;
+	margin-top : -525px;
+	}
+.div3{
+	margin: 0 auto;
+	width: 250px;
+	height: 470px;
+	border: 1px solid #F00;
+	margin-top : -475px;
+	margin-right: 20px;
+	}
+.div4{
+	margin: 0 auto;
+	width: 400px;
+	height: 50px;
+	border: 1px solid #F00;
+	margin-top : 80px;
+}
+
+</style>
+<body>
+<div class="div1" id="img_div">
+<img src="http://p3.music.126.net/LH7PtVBMt02PbphpyAiNmw==/6046214441318535.jpg" id="mp3pic" width="576" height="575"/>
+</div>
+<div class="div2">
+<ul id="mp3ul2">
+<li>播放列表:</li>
+</ul>
+</div>
+<div class="div3">
+<input name="sstext" id="ssk" type="text" value="fade">
+<input name="ss" id="ssnn" type="button" onClick="ss();" value="搜索">
+<ul id="mp3ul">
+</div>
+<div class="div4">
+<div style="margin-top:5px;margin-left:5px;">
+<input name="submit" type="image" value="ee" src="ico/1.jpg" align="middle" onClick="next2()"/>
+</div>
+<div style="margin-left:118px;margin-top:-40px">
+<input name="submit" type="image" value="ee" src="ico/3.jpg" align="middle" onClick="mp3start()"/></div>
+<div style="margin-left:231px;margin-top:-40px">
+<input name="submit" type="image" value="ee" src="ico/2.jpg" align="middle" onClick="mp3paus()"/></div>
+<div style="margin-left:353px;margin-top:-40px">
+<input name="submit" type="image" value="ee" src="ico/4.jpg" align="middle" onClick="next()"/></div>
+</div>
+<div class="div5">
+<audio id="mp3list" autoplay="autoplay" onended="next()">
+	<source src="http://m2.music.126.net/t24d6GoZRkqxzFAovlZEQw==/6027522743661760.mp3" id="mp3url" width="50" height="50px">
+</audio></div>
+
+
+</body>
+</html>
