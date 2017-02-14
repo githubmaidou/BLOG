@@ -15,7 +15,7 @@ define("MAIL_ENABLE", true);//开启邮件通知
 define("SMTP_SERVER", "smtp.qq.com");//smtp服务器
 define("SMTP_PORT", 465);//端口
 define("SMTP_SECURE", "ssl");
-define("MAIL_USER", "hackraindrop@foxmail.com");//发件人用户名
-define("MAIL_PASS", "wrivgluvbzolficb");//发件人密码
-define("MAIL_FROM", "hackraindrop@foxmail.com");//发件人地址（需真实，不可伪造）
-define("MAIL_RECV", "me_mail@foxmail.com");//接收通知的邮件地址
+define("MAIL_USER", "2p@foxmail.com");//发件人用户名
+define("MAIL_PASS", "1");//发件人密码
+define("MAIL_FROM", "1");//发件人地址（需真实，不可伪造）
+define("MAIL_RECV", "1@foxmail.com");//接收通知的邮件地址
